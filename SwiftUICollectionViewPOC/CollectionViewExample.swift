@@ -18,13 +18,14 @@ class CollectionViewExample: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.showsHorizontalScrollIndicator = false 
         return collectionView
     }()
     
     lazy var label: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 24.0)
-        label.text = "Find spaces that suit your style"
+        label.text = "Pick the dog that suits your needs"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -72,6 +73,9 @@ extension CollectionViewExample: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCollectionViewCell.reuseIdentifier, for: indexPath) as? MyCollectionViewCell else {
             fatalError("Could not dequeue cell")
         }
+        
+        // Add SwiftUI UIHostingController as a child of our UIViewController
+        cell.embed(in: self)
         return cell
     }
 }
